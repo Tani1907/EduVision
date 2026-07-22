@@ -1,18 +1,33 @@
 import { Outlet } from "react-router-dom";
 
+import Navbar from "../components/layout/Navbar";
+import Sidebar from "../components/layout/Sidebar";
+
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+
 function MainLayout() {
   return (
-    <>
-      <h2>Navbar</h2>
+    <Box sx={{ display: "flex" }}>
 
-      <hr />
+      <Navbar />
 
-      <Outlet />
+      <Sidebar />
 
-      <hr />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+        }}
+      >
+        <Toolbar />
 
-      <h2>Footer</h2>
-    </>
+        <Outlet />
+
+      </Box>
+
+    </Box>
   );
 }
 

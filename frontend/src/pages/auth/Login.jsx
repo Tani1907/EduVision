@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Paper,
@@ -9,46 +10,66 @@ import {
 
 import Input from "../../components/common/Input";
 import CustomButton from "../../components/common/Button";
+import api from "../../services/api";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-const validate = () => {
+  const validate = () => {
+    let temp = {};
 
-  let temp = {};
+    if (!email) {
+      temp.email = "Email is required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)
+    ) {
+      temp.email = "Invalid Email";
+    }
 
-  if(!email){
+    if (!password) {
+      temp.password = "Password is required";
+    } else if (password.length < 8) {
+      temp.password = "Minimum 8 characters";
+    }
 
-temp.email="Email is required";
+    setErrors(temp);
+
+    return Object.keys(temp).length === 0;
+  };
+
+  const handleLogin = async () => {
+    if (!validate()) return;
+
+    try {
+  const res = await api.post("/auth/login", {
+    email,
+    password,
+  });
+
+  console.log(res.data);
+
+  localStorage.setItem("token", res.data.token);
+
+  localStorage.setItem(
+    "user",
+    JSON.stringify(res.data.user)
+  );
+
+  alert("Login Successful");
+
+  navigate("/dashboard");
 
 }
-
-else if(
-!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)
-){
-
-temp.email="Invalid Email";
-
-}
-
-  if(!password){
-
-temp.password="Password is required";
-
-}
-
-else if(password.length<8){
-
-temp.password="Minimum 8 characters";
-
-}
-
-  setErrors(temp);
-
-  return Object.keys(temp).length === 0;
-};
+ catch (err) {
+      alert(
+        err.response?.data?.message || "Login Failed"
+      );
+    }
+  };
 
   return (
     <Container maxWidth="sm">
@@ -75,12 +96,11 @@ temp.password="Minimum 8 characters";
           Welcome Back
         </Typography>
 
-
         <Input
           label="Email"
           name="email"
           value={email}
-          onChange={(e)=>setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           error={!!errors.email}
           helperText={errors.email}
         />
@@ -90,19 +110,15 @@ temp.password="Minimum 8 characters";
           type="password"
           name="password"
           value={password}
-          onChange={(e)=>setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           error={!!errors.password}
           helperText={errors.password}
         />
 
         <CustomButton
-text="Login"
-onClick={()=>{
-if(validate()){
-console.log("Login");
-}
-}}
-/>
+          text="Login"
+          onClick={handleLogin}
+        />
 
         <Box
           display="flex"
