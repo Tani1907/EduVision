@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const register = async (req, res) => {
+
   try {
     const {
       name,
@@ -37,12 +38,12 @@ const register = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.log(err);
+  console.log(err);
 
-    res.status(500).json({
-      message: "Server Error",
-    });
-  }
+  res.status(500).json({
+    message: "Server Error",
+  });
+}
 };
 
 

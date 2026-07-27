@@ -1,18 +1,23 @@
 const express = require("express");
+const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
-
-const router = express.Router();
+const {
+  getProfile,
+  updateProfile,
+} = require("../controllers/studentController");
 
 router.get(
   "/profile",
   authMiddleware,
-  (req, res) => {
-    res.json({
-      message: "Protected Route",
-      user: req.user,
-    });
-  }
+  getProfile
 );
+
+router.put(
+  "/profile",
+  authMiddleware,
+  updateProfile
+);
+
 
 module.exports = router;

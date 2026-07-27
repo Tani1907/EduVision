@@ -7,7 +7,7 @@ import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 
 import Dashboard from "../pages/student/Dashboard";
-
+import Profile from "../pages/student/Profile";
 import ProtectedRoute from "./ProtectedRoute";
 
 
@@ -44,6 +44,11 @@ function AppRoutes() {
             path="/dashboard"
             element={<Dashboard />}
           />
+
+          <Route
+    path="/profile"
+    element={<Profile />}
+  />
 
         </Route>
 
