@@ -9,6 +9,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import Dashboard from "../pages/student/Dashboard";
 import Profile from "../pages/student/Profile";
 import ProtectedRoute from "./ProtectedRoute";
+import Attendance from "../pages/attendance/Attendance";
 
 
 function AppRoutes() {
@@ -50,6 +51,15 @@ function AppRoutes() {
     element={<Profile />}
   />
 
+
+<Route
+path="/attendance"
+element={
+<ProtectedRoute>
+<Attendance/>
+</ProtectedRoute>
+}
+/>
         </Route>
 
 
