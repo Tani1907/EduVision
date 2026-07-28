@@ -1,0 +1,15 @@
+import api from "./api";
+
+export const getProfile = async () => {
+  const response = await api.get("/student/profile");
+  return response.data;
+};
+
+export const updateProfile = async (profileData) => {
+  const response = await api.put(
+    "/student/profile",
+    profileData
+  );
+
+  return response.data;
+};
