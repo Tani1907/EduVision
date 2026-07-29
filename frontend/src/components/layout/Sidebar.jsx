@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SchoolIcon from "@mui/icons-material/School";
+import HistoryIcon from "@mui/icons-material/History";
+import StorageIcon from "@mui/icons-material/Storage";
 import CodeIcon from "@mui/icons-material/Code";
 import QuizIcon from "@mui/icons-material/Quiz";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -36,8 +38,13 @@ const menuItems = [
     path: "/attendance",
   },
   {
+    text: "Attendance History",
+    icon: <HistoryIcon />,
+    path: "/attendance-history",
+  },
+  {
     text: "SQL Lab",
-    icon: <CodeIcon />,
+    icon: <StorageIcon />,
     path: "/sql-lab",
   },
   {
@@ -85,7 +92,6 @@ function Sidebar() {
             to={item.path}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
-
             <ListItemText primary={item.text} />
           </ListItemButton>
         ))}

@@ -1,2 +1,12 @@
-node_modules
+# Python virtual environment
+ai/venv/
+
+# Node modules
+node_modules/
+
+# Environment files
 .env
+
+# Python cache
+__pycache__/
+*.pyc

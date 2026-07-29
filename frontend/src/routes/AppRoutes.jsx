@@ -8,8 +8,14 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 
 import Dashboard from "../pages/student/Dashboard";
 import Profile from "../pages/student/Profile";
+
 import ProtectedRoute from "./ProtectedRoute";
+
 import Attendance from "../pages/attendance/Attendance";
+import AttendanceHistory from "../pages/attendance/AttendanceHistory";
+
+import SQLDashboard from "../pages/sql/SQLDashboard";
+import SQLLab from "../pages/sql/SQLLab";
 
 
 function AppRoutes() {
@@ -18,7 +24,8 @@ function AppRoutes() {
 
       <Routes>
 
-        {/* Authentication */}
+        {/* Public Routes */}
+
         <Route path="/" element={<Login />} />
 
         <Route 
@@ -32,7 +39,8 @@ function AppRoutes() {
         />
 
 
-        {/* Protected Pages */}
+        {/* Protected Routes */}
+
         <Route
           element={
             <ProtectedRoute>
@@ -41,27 +49,46 @@ function AppRoutes() {
           }
         >
 
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
+          <Route 
+            path="/dashboard" 
+            element={<Dashboard />} 
           />
 
+          <Route 
+            path="/profile" 
+            element={<Profile />} 
+          />
+
+
+          <Route 
+            path="/attendance" 
+            element={<Attendance />} 
+          />
+
+
+          <Route 
+            path="/attendance-history" 
+            element={<AttendanceHistory />} 
+          />
+
+
+          {/* SQL Learning Dashboard */}
+
           <Route
-    path="/profile"
-    element={<Profile />}
-  />
+            path="/sql-lab"
+            element={<SQLDashboard />}
+          />
 
 
-<Route
-path="/attendance"
-element={
-<ProtectedRoute>
-<Attendance/>
-</ProtectedRoute>
-}
-/>
+          {/* SQL Editor */}
+
+          <Route
+            path="/sql-playground"
+            element={<SQLLab />}
+          />
+
+
         </Route>
-
 
       </Routes>
 

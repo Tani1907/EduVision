@@ -17,3 +17,7 @@ export const markAttendance = async () => {
   const response = await api.post("/attendance/mark");
   return response.data;
 };
+export const getAttendanceHistory = async () => {
+  const response = await api.get("/attendance/history");
+  return response.data;
+};

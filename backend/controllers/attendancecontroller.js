@@ -54,7 +54,33 @@ const markAttendance = async (req, res) => {
   }
 };
 
+const getStudentAttendance = async (req, res) => {
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+      attendance_date,
+      check_in_time,
+      status
+      FROM attendance
+      WHERE student_id = $1
+      ORDER BY attendance_date DESC
+      `,
+      [req.user.id]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
+
 module.exports = {
   registerFace,
   markAttendance,
+  getStudentAttendance,
 };

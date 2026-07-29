@@ -9,8 +9,8 @@ const authMiddleware = require("../middleware/authMiddleware");
 const {
   registerFace,
   markAttendance,
+  getStudentAttendance,
 } = require("../controllers/attendanceController");
-
 router.post(
   "/register-face",
   authMiddleware,
@@ -24,4 +24,9 @@ router.post(
   markAttendance
 );
 
+router.get(
+  "/history",
+  authMiddleware,
+  getStudentAttendance
+);
 module.exports = router;
